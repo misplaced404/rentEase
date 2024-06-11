@@ -662,6 +662,7 @@ export const handleApproveSubscription = async (subscriptionId) => {
                 case 'bundle1': userType = "Premium (B3 Months)"; break;
                 case 'bundle2': userType = "Premium (B6 Months)"; break;
                 case 'bundle3': userType = "Premium (B12 Months)"; break;
+                case 'ultimate': userType = "Premium (Ultimate)"; break;
                 default: /* Your code here */ break;
             }
 

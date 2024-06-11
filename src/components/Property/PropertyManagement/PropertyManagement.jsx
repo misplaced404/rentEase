@@ -89,6 +89,21 @@ function PropertyManagement( ) {
             }
         });
     };
+
+    // Determine if the Add Property button should be disabled
+      const shouldDisableAddButton = () => {
+          switch (userType) {
+              case 'Premium (Regular)':
+                  return properties.length > 0;
+              case 'Premium (B3 Months)':
+              case 'Premium (B6 Months)':
+              case 'Premium (B12 Months)':
+              case 'Owner (Free Trial)':
+                  return properties.length > 2;
+              default:
+                  return false;
+          }
+      };
     
     return (
       <>
@@ -99,7 +114,7 @@ function PropertyManagement( ) {
         <PropertyManagementContainer>
           <h1>Property Management</h1>
           <div className='cardContainer'>
-            <button className='addButton' onClick={handleShowAdd}>
+          <button className='addButton' onClick={handleShowAdd} disabled={shouldDisableAddButton()}>
               <div className='addButtonCard'>
                 <div className='addProperty'>
                   <FaPlus className='addPropertyIcon' /> 
