@@ -97,34 +97,38 @@ function SideMenu() {
     // Define the details of each subscription plan
     const subscriptionDetails = {
         regular: {
-            duration: "3 Months",
-            totalRate: "Php 387.00",
-            monthlyRate: "Php 129.00",
-            benefits: "Unlimited Property Listings"
+            duration: "1 Month",
+            monthlyRate: "Php 149.00",
+            benefits:  ["1 Property Listings"]
         },
         bundle1: {
             duration: "3 Months",
-            totalRate: "Php 777.00",
-            monthlyRate: "Php 86.00",
-            benefits: "List Upto 3 Properties"
+            totalRate: "Php 899.00",
+            monthlyRate: "Php 299.67",
+            benefits: ["List Upto 3 Properties", "Save Up To Php 442"]
         },
         bundle2: {
             duration: "6 Months",
-            totalRate: "Php 1,388.00",
-            monthlyRate: "Php 77.00",
-            benefits: "List Upto 3 Properties"
+            totalRate: "Php 1,799.00",
+            monthlyRate: "Php 299.83",
+            benefits: ["List Upto 3 Properties","Save Up To Php 883"]
         },
         bundle3: {
             duration: "12 Months",
-            totalRate: "Php 2,379.00",
-            monthlyRate: "Php 66.00",
-            benefits: "List Upto 3 Properties"
-        }
+            totalRate: "Php 3,599.00",
+            monthlyRate: "Php 299.92",
+            benefits: ["List Upto 3 Properties", "Save Up To Php 1,765"]
+        },
+        ultimate: {
+            duration: "1 Month",
+            monthlyRate: "Php 129.00",
+            benefits: ["Unlimited Property Listings"]
+        },
     };
 
     const updateSelectedSubscription = (selected) => {
         let selectedSub;
-        [regular, bundle1, bundle2, bundle3].forEach(subscription => {
+        [regular, bundle1, bundle2, bundle3, ultimate].forEach(subscription => {
             if (subscription === selected) {
                 subscription.classList.add('selected');
                 // Use the id of the subscription div as the subscription name
@@ -135,7 +139,7 @@ function SideMenu() {
         });
         setSelectedSubscription(selectedSub);
         selectedSubscriptionRef.current = selectedSub; // Update the ref
-        console.log("sdgsdgsdgs",selectedSub);
+        console.log("selected subscription: ",selectedSubscriptionRef.current)
     };
     
     
@@ -145,7 +149,7 @@ function SideMenu() {
 
         Swal.fire({
             title: "Choose a Subscription Plan",
-            width: '1000px',
+            width: '1300px',
             confirmButtonText: "Proceed to Payment",
             confirmButtonColor: "#0e7490",
             showCancelButton: true,
@@ -169,12 +173,6 @@ function SideMenu() {
                         align-items: center;
                         margin: 5px;
 
-                        .bundle {
-                            display: flex;
-                            width: 100%;
-                            justify-content: space-between;
-                        }
-
                         h2{
                             color: #0e7490;
                             font-weight: bold;
@@ -193,6 +191,7 @@ function SideMenu() {
                                 width: 100%;
                                 display: flex; 
                                 justify-content: center;
+                                
                             }
                         }
 
@@ -200,13 +199,30 @@ function SideMenu() {
                             width: 100%;
                             display: flex; 
                             flex-direction: column;
-                            flex:1;
+                            flex:0;
+                            gap: 5px;
+
+                            .bundle {
+                                display: flex;
+                                width: 100%;
+                                gap: 20px;
+                                margin: 0 10px 0px 10px;
+                            }
+                        }
+
+                        .column3{
+                            width: 100%;
+                            display: flex; 
+                            flex-direction: column;
+                            flex: 0;
+                            margin-left: 20px;
                             gap: 5px;
 
                             .body{
                                 width: 100%;
                                 display: flex; 
                                 justify-content: center;
+                                
                             }
                         }
 
@@ -235,6 +251,13 @@ function SideMenu() {
                             font-size: 25px;
                         }
 
+                        .header0{
+                            width: 100%;
+                            border-radius: 10px 10px 0 0;
+                            background-color:  #b7d5de;
+                            padding-bottom: 10px;
+                        }
+
                         .header1{
                             width: 100%;
                             border-radius: 10px 10px 0 0;
@@ -253,6 +276,13 @@ function SideMenu() {
                             width: 100%;
                             border-radius: 10px 10px 0 0;
                             background-color:#0e7490;
+                            padding-bottom: 10px;
+                        }
+
+                        .header4{
+                            width: 100%;
+                            border-radius: 10px 10px 0 0;
+                            background-color: #0e5a76;
                             padding-bottom: 10px;
                         }
 
@@ -319,7 +349,7 @@ function SideMenu() {
                         <h2>Regular Subscription</h2><hr />
                         <div class="body">
                             <div id="regular" class="subscriptionOption ${selectedSubscription === 'Regular' ? 'selected' : ''}">
-                                <div class="header2">
+                                <div class="header0">
                                     <h3>1 Month</h3>
                                 </div>
                                 <div class="cardBody">
@@ -333,7 +363,6 @@ function SideMenu() {
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                     <div class="column2">
                         <h2>Rent - Easy Bundle</h2><hr />
@@ -390,8 +419,26 @@ function SideMenu() {
                             </div>
                         </div>
                     </div>
-                   
-            </div> 
+                    <div class="column3">
+                        <h2>Ultimate Subscription</h2><hr />
+                        <div class="body">
+                            <div id="ultimate" class="subscriptionOption ${selectedSubscription === 'Ultimate' ? 'selected' : ''}">
+                                <div class="header4">
+                                    <h3>1 Month</h3>
+                                </div>
+                                <div class="cardBody">
+                                    <div class="price">
+                                        <span class="monthlyRate">Php 149.00<span class="subRate"> /month</span></span>
+                                    </div>
+                                    <div class="benefit">
+                                        <span>Benefits</span>
+                                        <span class="benefits"><span class="checkMark">&#10003; </span>Unlimited Property Listing</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
                 
             `,
             didOpen: () => {
@@ -400,11 +447,13 @@ function SideMenu() {
                     const bundle1 = document.getElementById('bundle1');
                     const bundle2 = document.getElementById('bundle2');
                     const bundle3 = document.getElementById('bundle3');
+                    const ultimate = document.getElementById('ultimate');
     
                     regular.addEventListener('click', () => updateSelectedSubscription(regular));
                     bundle1.addEventListener('click', () => updateSelectedSubscription(bundle1));
                     bundle2.addEventListener('click', () => updateSelectedSubscription(bundle2));
                     bundle3.addEventListener('click', () => updateSelectedSubscription(bundle3));
+                    ultimate.addEventListener('click', () => updateSelectedSubscription(ultimate));
                 };
     
                 addEventListeners();

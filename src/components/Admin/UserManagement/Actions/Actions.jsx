@@ -489,6 +489,8 @@ export const handleViewSubscription = async (subscriptionId) => {
         const duration = data.subscriptionDetails.duration;
         const monthlyRate = data.subscriptionDetails.monthlyRate;
         const totalRate = data.subscriptionDetails.totalRate;
+        let totalRateHtml = totalRate ? `<span class="totalRate">${totalRate}<span class="subRate"> /${duration}</span></span>` : '';
+
 
         Swal.fire({
             title: "Subscription Details",
@@ -506,6 +508,8 @@ export const handleViewSubscription = async (subscriptionId) => {
 
                     h2{
                         color: #0e7490;
+                        font-weight: bold;
+                        font-size: 20px;
                     }
                 }
 
@@ -563,12 +567,12 @@ export const handleViewSubscription = async (subscriptionId) => {
                         margin-top: 10px;
 
                         .totalRate{
-                            font-size: 20px;
-                            font-weight: bold;
                             color: #0e7490;
                         }
     
                         .monthlyRate{
+                            font-size: 20px;
+                            font-weight: bold;
                             color: #0e7490;
                         }
     
@@ -606,14 +610,14 @@ export const handleViewSubscription = async (subscriptionId) => {
                 <div class="container">
                     <div class="subscription">
                         <h1>Selected Subscription</h1>
-                        <h2>${subscriptionType}<h2>
+                        <h2>${subscriptionType}</h2>
                         <div class="subscriptionOption">
                             <div class="header2">
                                 <h3>${duration}</h3>
                             </div>
                             <div class="body">
-                                <span class="totalRate">${totalRate}</span>
                                 <span class="monthlyRate">${monthlyRate}<span class="subRate"> /month</span></span>
+                                ${totalRateHtml}
                                 <span>Benefits</span>
                                 <span class="benefits"><span class="checkMark">✓ </span>${benefits}</span>
                             </div>
