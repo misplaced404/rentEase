@@ -720,7 +720,7 @@ export const handleRejectSubscription = async (subscriptionId) => {
   
             await updateDoc(doc(db, "users", userId), {
               rejectReason: result.value,
-              userType: "Renter" 
+              userType: "Owner (Free Trial)" 
             });
   
             // Fetch the user data from Firestore
