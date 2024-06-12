@@ -79,7 +79,7 @@ export const PropertyCard = styled.div`
     .greyed{
         height: 100%;
         width: 100%;
-        z-index: 100;
+        z-index: 20;
         background-color: rgba(128, 128, 128, .9);
         position: absolute;
         display: flex;

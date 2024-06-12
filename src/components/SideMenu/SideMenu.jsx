@@ -121,8 +121,8 @@ function SideMenu() {
         },
         ultimate: {
             duration: "1 Month",
-            monthlyRate: "Php 129.00",
-            benefits: ["Unlimited Property Listings"]
+            monthlyRate: "Php 499.00",
+            benefits: ["4 or More Property Listings"]
         },
     };
 
@@ -205,7 +205,7 @@ function SideMenu() {
                             .bundle {
                                 display: flex;
                                 width: 100%;
-                                gap: 20px;
+                                gap: 30px;
                                 margin: 0 10px 0px 10px;
                             }
                         }
@@ -428,11 +428,11 @@ function SideMenu() {
                                 </div>
                                 <div class="cardBody">
                                     <div class="price">
-                                        <span class="monthlyRate">Php 149.00<span class="subRate"> /month</span></span>
+                                        <span class="monthlyRate">Php 499.00<span class="subRate"> /month</span></span>
                                     </div>
                                     <div class="benefit">
                                         <span>Benefits</span>
-                                        <span class="benefits"><span class="checkMark">&#10003; </span>Unlimited Property Listing</span>
+                                        <span class="benefits"><span class="checkMark">&#10003; </span>4 or More Property Listing</span>
                                     </div>
                                 </div>
                             </div>

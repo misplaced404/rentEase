@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const ManagePropertyContainer = styled.div`
     position:fixed;
     overflow: auto;
-    z-index:2;
+    z-index:21;
     top:0;
     bottom: 0;
     right:0;

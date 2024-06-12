@@ -485,11 +485,13 @@ export const handleViewSubscription = async (subscriptionId) => {
         const data = docSnap.data();
         const subscriptionType = data.subscriptionType;
         const proofOfPayment = data.proofOfPayment;
-        const benefits = data.subscriptionDetails.benefits;
+        const benefits = Array.isArray(data.subscriptionDetails.benefits) ? data.subscriptionDetails.benefits : [data.subscriptionDetails.benefits];
         const duration = data.subscriptionDetails.duration;
         const monthlyRate = data.subscriptionDetails.monthlyRate;
         const totalRate = data.subscriptionDetails.totalRate;
+        
         let totalRateHtml = totalRate ? `<span class="totalRate">${totalRate}<span class="subRate"> /${duration}</span></span>` : '';
+        let benefitsHtml = benefits.map(benefit => `<span class="benefits"><span class="checkMark">✓ </span>${benefit}</span>`).join('');
 
 
         Swal.fire({
@@ -619,7 +621,7 @@ export const handleViewSubscription = async (subscriptionId) => {
                                 <span class="monthlyRate">${monthlyRate}<span class="subRate"> /month</span></span>
                                 ${totalRateHtml}
                                 <span>Benefits</span>
-                                <span class="benefits"><span class="checkMark">✓ </span>${benefits}</span>
+                                ${benefitsHtml}
                             </div>
                         </div>
                     </div>

@@ -128,9 +128,9 @@ function PropertyDetail(){
                     display: flex; 
                     align-items: center; 
                     gap:10px;
-    
-                    select{
-                        width: 262px;
+
+                    .occupationDropDown{
+                        width: 265px;
                     }
                 }
     
@@ -150,10 +150,12 @@ function PropertyDetail(){
                     padding: 5px 10px;
                     border: 2px solid #0e7490; 
                     border-radius:10px;
+                    margin: 0px;
                 }
     
                 .occupation, .durationSection, .startDate{
                     label{
+                        width: 160px;;
                         flex-basis: 160px;
                         text-align: left;
                     }
@@ -165,9 +167,15 @@ function PropertyDetail(){
                     margin:0px;
                     width: 262px;
                 }
+
+                .stay{
+                    display:flex;
+                    align-items: center; 
+                    gap: 10px;
+                }
     
                 .durationNum{
-                    width: 80px;
+                    width: 70px;
                     height: 47.25px !important;
                     padding: 5px 10px;
                     border: 2px solid #0e7490;
@@ -177,6 +185,7 @@ function PropertyDetail(){
 
                 .durationUnit{
                     width: 180px;
+                    margin:0px;
                 }
 
             </style>
@@ -196,7 +205,7 @@ function PropertyDetail(){
                 </div>
                 <div class="durationSection">
                     <label htmlFor='durationNumber'> Duration of Stay</label>
-                    <div>
+                    <div class="stay">
                         <input id="durationNumber" name="durationNumber" class="swal2-input durationNum" type="number" min="1" >
                         <select id="durationUnit" name="durationUnit"  class="swal2-input durationUnit" style="padding: 5px 10px;border: 2px solid #0e7490; border-radius:10px;">
                             <option value="">Choose here</option>
