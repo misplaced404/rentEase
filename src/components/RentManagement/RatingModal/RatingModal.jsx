@@ -7,7 +7,10 @@ import { doc, getDoc, getDocs, getFirestore, collection, addDoc, query, where, T
 import { getAuth } from 'firebase/auth';
 
 
-function RatingModal({ closeModal }) {
+function RatingModal({ closeModal, propertyId  }) {
+
+  console.log("THE PROPERTY ID BEING PASSED:", propertyId);
+
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const [rentRequests, setRentRequests] = useState([]);
@@ -73,7 +76,7 @@ function RatingModal({ closeModal }) {
         onChange: ratingChanged
     }
     
-    const handleRate = async (propertyId) => {
+    const handleRate = async () => {
         const db = getFirestore();
         const auth = getAuth();
         const user = auth.currentUser;
@@ -124,9 +127,7 @@ function RatingModal({ closeModal }) {
               <textarea name="comments" className="comments" id="" cols="70" rows="5" placeholder='Enter your comments here' onChange={e => setComment(e.target.value)}></textarea>
             </div>  
             <div className='actions'>
-              {rentRequests.map((rentRequest) => (
-                <button key={rentRequest.id} className='rate' onClick={() => handleRate(rentRequest.propertyId)}>Rate</button>
-              ))}
+              <button className='rate' onClick={() => handleRate(propertyId)}>Rate</button>
               <button className='cancel' onClick={closeModal}>Cancel</button>
             </div>
           </div>

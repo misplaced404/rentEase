@@ -19,6 +19,24 @@ function Transaction() {
     const [rentRequests, setRentRequests] = useState([]);
     const [activeTab, setActiveTab] = useState('renter');
 
+    const [userType, setUserType] = useState(null);
+
+    useEffect(() => {
+        const fetchUserType = async () => {
+            const db = getFirestore();
+            const auth = getAuth();
+            const userId = auth.currentUser.uid;
+    
+            const userRef = doc(db, "users", userId);
+            const userSnapshot = await getDoc(userRef);
+            const userData = userSnapshot.data();
+    
+            setUserType(userData.userType);  // Assume userType is stored in user document
+        };
+    
+        fetchUserType();
+    }, []);
+
     useEffect(() => {
         const fetchTransactions = () => {
             console.log("fetchTransactions called");
@@ -142,6 +160,7 @@ function Transaction() {
                 // Filter out null values (which were renters for properties not owned by the current user)
                 const filteredRentRequests = combinedRentRequests.filter(data => data !== null);
                 setRentRequests(filteredRentRequests);
+                console.log ("Filtered rent reqs", filteredRentRequests );
             });
     
             // Return a function that removes the listener
@@ -160,10 +179,12 @@ function Transaction() {
             </div>
             <div className="body">
                 <div className="tabContainer">
+                {userType !== 'Renter' && (
                     <div className={`tab ${activeTab === 'owner' ? 'active' : ''}`} onClick={() => setActiveTab('owner')}>Owned Property</div>
+                )}
                     <div className={`tab ${activeTab === 'renter' ? 'active' : ''}`} onClick={() => setActiveTab('renter')}>Rented Property</div>
                 </div>
-                {activeTab === 'owner' && (
+                { userType !== 'Renter'&& activeTab === 'owner' && (
                     <div className="ownerContent">
                         <h2>Renter Applicants</h2>
                         <div className='table'>

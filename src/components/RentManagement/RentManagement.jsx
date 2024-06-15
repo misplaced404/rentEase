@@ -21,6 +21,7 @@ import { Link } from 'react-router-dom';
 function RentManagement() {
 
   const [propertyData, setPropertyData] = useState(null);
+  const [propertyToRate, setPropertyToRate] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [rentRequests, setRentRequests] = useState([]);
   const [activeTab, setActiveTab] = useState('liked');
@@ -386,9 +387,11 @@ const handlePayment = async (request) => {
   });
 };
 
-  const handleRate = () => {
-      setIsRatingModalOpen(true);
-  }
+const handleRate = (propertyId) => {
+  setPropertyToRate(propertyId);
+  setIsRatingModalOpen(true);
+};
+
 
   const closeModal = () => {
     setIsRatingModalOpen(false);
@@ -424,7 +427,7 @@ const handlePayment = async (request) => {
   return (
     <>
       {isRatingModalOpen && (
-        <RatingModal closeModal={closeModal} />
+        <RatingModal closeModal={closeModal} propertyId={propertyToRate} />
       )}
       <Sidemenu/>
       <RentManagementContainer>
@@ -529,7 +532,7 @@ const handlePayment = async (request) => {
                   <div className="actionBtn">
                     <button className='message' onClick={handleMessage}><AiFillMessage className='icon'/>Message</button>
                     <button className='pay' onClick={() => handlePayment(request)}><FaCoins className='icon'/>Pay Rent</button>
-                    <button className='rate' onClick={handleRate}><FaStar className='icon'/>Rate</button>
+                    <button className='rate' onClick={() => handleRate(request.propertyId)}><FaStar className='icon'/>Rate</button>
                   </div>
                 </div>
               </div>

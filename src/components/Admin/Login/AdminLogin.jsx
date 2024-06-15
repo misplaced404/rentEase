@@ -1,29 +1,30 @@
 import { useState } from 'react';
 import { AdminLoginContainer } from './AdminLogin.style';
 import logo from '../../../assets/Logo/RentEase Logo2.png';
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 export default function AdminLogin() {
-    const [userName, setUserName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-
     const handleLogin = async () => {
-        const db = getFirestore();
-        const q = query(collection(db, 'admin'), where('username', '==', userName), where('password', '==', password));
-        const querySnapshot = await getDocs(q);
-        
-        if (!querySnapshot.empty) {
-          console.log('Login successful');
-          navigate('/adminUserManagement');
-        } else {
-          console.error('Error signing in');
+        const auth = getAuth();
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            // Signed in 
+            const user = userCredential.user;
+            console.log('Login successful');
+            navigate('/adminUserManagement');
+        } catch (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error('Error signing in', errorCode, errorMessage);
         }
-      };
+    };
 
-      return (
+    return (
         <AdminLoginContainer>
           <div className='side'>
             <div className="imagecontainer">
@@ -38,12 +39,12 @@ export default function AdminLogin() {
             <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
               <div className='inputField'>
                 <input 
-                  type="text" 
-                  name="userName" 
-                  className="userName" 
-                  placeholder='User name' 
-                  value={userName} 
-                  onChange={(e) => setUserName(e.target.value)}
+                  type="email" 
+                  name="email" 
+                  className="email" 
+                  placeholder='Email' 
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <input 
                   type="password" 
@@ -58,6 +59,5 @@ export default function AdminLogin() {
             </form>
           </div>
         </AdminLoginContainer>
-      );
-      
+    );
 }
