@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {useState, useEffect} from 'react'
 import ReactStars from "react-rating-stars-component";
 import { FaStar, FaStarHalfAlt, FaRegStar  } from "react-icons/fa";

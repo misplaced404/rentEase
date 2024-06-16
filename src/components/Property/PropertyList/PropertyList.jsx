@@ -213,7 +213,7 @@ function PropertyList() {
   });
 
   const handleFilter = async() => {
-    const propertyType = [ "Any", "Boarding House", "Apartment", "Hotel", "Condominium","Loft",];
+    const propertyType = [ "Any", "Boarding House", "Apartment", "Condominium"];
 
     const location = [
       'Any', 'Adlaon', 'Agsungot', 'Apas', 'Bacayan', 'Banilad', 'Binaliw', 'Budla-an', 'Buhisan', 
